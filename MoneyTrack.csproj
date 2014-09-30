@@ -164,21 +164,25 @@
     <Compile Include="BrowserJsonFormatter.cs" />
     <Compile Include="Controllers\Api\GroupsController.cs" />
     <Compile Include="Controllers\Controllers.cs" />
+    <Compile Include="BNZ\IClient.cs" />
+    <Compile Include="BNZ\ILoggedInClient.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Group.cs" />
     <Compile Include="IModule.cs" />
     <Compile Include="Services\GroupsImpl.cs" />
     <Compile Include="Services\IGroups.cs" />
+    <Compile Include="Services\ITransactionsImporter.cs" />
     <Compile Include="Services\ServicesModule.cs" />
+    <Compile Include="Services\TransactionsImporterImpl.cs" />
     <Compile Include="SimpleInjectorDependencyResolver.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Api\TransactionsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Importer\Importer.cs" />
-    <Compile Include="Importer\LoggedInImporter.cs" />
-    <Compile Include="Importer\Models\BNZTransaction.cs" />
+    <Compile Include="BNZ\ClientImpl.cs" />
+    <Compile Include="BNZ\ILoggedInClientImpl.cs" />
+    <Compile Include="BNZ\Models\BNZTransaction.cs" />
     <Compile Include="DbContext.cs" />
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

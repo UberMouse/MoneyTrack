@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
+using MoneyTrack.BNZ;
 using MoneyTrack.Models;
 using MoneyTrack.Services;
 
@@ -8,14 +9,14 @@ namespace MoneyTrack.Controllers.Api
     public class TransactionsController : ApiController
     {
         private readonly ITransactions _transactions;
-        private readonly IGroups _groups;
-        private readonly Importer.Importer _importer;
+        private readonly BNZ.IClient _client;
+        private readonly ITransactionsImporter _importer;
 
 
-        public TransactionsController(ITransactions transactions, IGroups groups, Importer.Importer importer)
+        public TransactionsController(ITransactions transactions, BNZ.IClient client, ITransactionsImporter importer)
         {
             _transactions = transactions;
-            _groups = groups;
+            _client = client;
             _importer = importer;
         }
 
@@ -45,8 +46,8 @@ namespace MoneyTrack.Controllers.Api
         [HttpPost]
         public void Import(Credentials credentials)
         {
-            var importer = _importer.Login(credentials.AccessId, credentials.Password);
-            importer.Import();
+            var loggedInClient = _client.Login(credentials.AccessId, credentials.Password);
+            _importer.Import(loggedInClient.Transactions());
         }
 
         public class Credentials

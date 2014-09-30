@@ -20,7 +20,7 @@ namespace MoneyTrack.Controllers.Api
         [HttpPost]
         public Group Index(GroupData data)
         {
-            if(!data.Valid()) throw new Exception();
+            if(!data.Valid()) throw new Exception("Color is invalid");
            return _groups.Create(data.Name, data.Color);
         }
 

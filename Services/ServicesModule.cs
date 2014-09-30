@@ -13,6 +13,7 @@ namespace MoneyTrack.Services
         {
             c.Register<IGroups, GroupsImpl>();
             c.Register<ITransactions, TransactionsImpl>();
+            c.Register<ITransactionsImporter, TransactionsImporterImpl>();
         }
     }
 }

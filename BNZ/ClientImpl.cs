@@ -3,21 +3,21 @@ using System.Net;
 using MoneyTrack.Services;
 using RestSharp;
 
-namespace MoneyTrack.Importer
+namespace MoneyTrack.BNZ
 {
-    public class Importer
+    public class ClientImpl : IClient
     {
-        private const string ROOT = "https://www.bnz.co.nz";
+        private const string Root = "https://www.bnz.co.nz";
         private readonly ITransactions _transactions;
 
-        public Importer(ITransactions transactions)
+        public ClientImpl(ITransactions transactions)
         {
             _transactions = transactions;
         }
 
-        public LoggedInImporter Login(string accessid, string pw)
+        public ILoggedInClient Login(string accessid, string pw)
         {
-            var client = new RestClient(ROOT)
+            var client = new RestClient(Root)
             {
                 CookieContainer = new CookieContainer(),           
             };
@@ -36,7 +36,7 @@ namespace MoneyTrack.Importer
             client.Execute(tokenRequest);
 
             if (response.StatusCode != HttpStatusCode.OK) return null;
-            else return new LoggedInImporter(_transactions, client);
+            else return new LoggedInClientImpl(_transactions, client);
         }
     }
 }

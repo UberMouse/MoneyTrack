@@ -9,5 +9,6 @@ namespace MoneyTrack.Services
         List<Transaction> All();
         void Update(Transaction t);
         Transaction Find(int id);
+        bool Contains(Transaction t);
     }
 }

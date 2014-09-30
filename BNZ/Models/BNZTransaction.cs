@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MoneyTrack.Importer.Models
+namespace MoneyTrack.BNZ.Models
 {
     public class BNZTransaction
     {

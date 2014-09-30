@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
-using MoneyTrack.Importer;
 using MoneyTrack.Models;
 
 namespace MoneyTrack.Services
@@ -36,6 +35,11 @@ namespace MoneyTrack.Services
         public Transaction Find(int id)
         {
            return  _context.Transactions.Find(id);
+        }
+
+        public bool Contains(Transaction t)
+        {
+            return _context.Transactions.Contains(t);
         }
     }
 }

@@ -1,19 +1,17 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using MoneyTrack.Importer.Models;
-using MoneyTrack.Models;
+using MoneyTrack.BNZ.Models;
 using MoneyTrack.Services;
 using RestSharp;
 
-namespace MoneyTrack.Importer
+namespace MoneyTrack.BNZ
 {
-    public class LoggedInImporter
+    public class LoggedInClientImpl : ILoggedInClient
     {
         private readonly ITransactions _transactions;
         private readonly RestClient _client;
 
-        internal LoggedInImporter(ITransactions transactions, RestClient client)
+        internal LoggedInClientImpl(ITransactions transactions, RestClient client)
         {
             _transactions = transactions;
             _client = client;
@@ -27,12 +25,6 @@ namespace MoneyTrack.Importer
 
             if (response.StatusCode != HttpStatusCode.OK) return null;
             return response.Data;
-        }
-
-        public void Import()
-        {
-            foreach(var t in Transactions().Select(Transaction.From))
-                _transactions.Add(t);
         }
     }
 }
