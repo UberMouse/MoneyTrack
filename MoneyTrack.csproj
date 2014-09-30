@@ -185,6 +185,10 @@
     <Compile Include="Services\TransactionsImpl.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\MoneyTrack.DbContext.mdf" />
+    <Content Include="App_Data\MoneyTrack.DbContext_log.ldf">
+      <DependentUpon>MoneyTrack.DbContext.mdf</DependentUpon>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
@@ -196,7 +200,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>

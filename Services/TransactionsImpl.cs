@@ -30,7 +30,7 @@ namespace MoneyTrack.Services
         public void Update(Transaction t)
         {
             _context.Transactions.AddOrUpdate(t);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
         public Transaction Find(int id)

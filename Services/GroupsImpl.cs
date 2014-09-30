@@ -33,7 +33,7 @@ namespace MoneyTrack.Services
         public void Update(Group group)
         {
             _context.Groups.AddOrUpdate(group);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
         public List<Group> All()
