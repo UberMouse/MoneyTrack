@@ -16,7 +16,6 @@ namespace MoneyTrack.Models
 
         [ForeignKey("Group")]
         public int GroupId { get; set; }
-        [Required]
         public virtual Group Group { get; set; }
 
         public static Transaction From(BNZTransaction bnzTransaction)
