@@ -1,11 +1,11 @@
 ﻿using System.Data.Entity;
-using MoneyTrack.Importer.Models;
 using MoneyTrack.Models;
 
-namespace MoneyTrack.Importer
+namespace MoneyTrack
 {
-    public class TransactionContext : DbContext
+    public class DbContext : System.Data.Entity.DbContext
     {
         public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<Group> Groups { get; set; }
     }
 }

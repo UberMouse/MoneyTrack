@@ -9,9 +9,9 @@ namespace MoneyTrack.Services
 {
     public class TransactionsImpl : ITransactions
     {
-        private readonly TransactionContext _context;
+        private readonly DbContext _context;
 
-        public TransactionsImpl(TransactionContext context)
+        public TransactionsImpl(DbContext context)
         {
             _context = context;
         }

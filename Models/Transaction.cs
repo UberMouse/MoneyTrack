@@ -25,7 +25,9 @@ namespace MoneyTrack.Models
                 AccountId = bnzTransaction.accountId,
                 Date = bnzTransaction.date,
                 Description = bnzTransaction.description,
-                Amount = bnzTransaction.formattedAmount
+                Amount = bnzTransaction.formattedAmount,
+                //First Group ('Untagged') should always have Id of 1
+                GroupId = 1
             };
         }
     }

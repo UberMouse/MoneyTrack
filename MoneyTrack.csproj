@@ -178,7 +178,7 @@
     <Compile Include="Importer\Importer.cs" />
     <Compile Include="Importer\LoggedInImporter.cs" />
     <Compile Include="Importer\Models\BNZTransaction.cs" />
-    <Compile Include="Importer\TransactionContext.cs" />
+    <Compile Include="DbContext.cs" />
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ITransactions.cs" />

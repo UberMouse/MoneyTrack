@@ -8,9 +8,9 @@ namespace MoneyTrack.Services
 {
     public class GroupsImpl : IGroups
     {
-        private readonly GroupsContext _context;
+        private readonly DbContext _context;
 
-        public GroupsImpl(GroupsContext context)
+        public GroupsImpl(DbContext context)
         {
             _context = context;
         }
@@ -39,10 +39,5 @@ namespace MoneyTrack.Services
         {
             return _context.Groups.ToList();
         }
-    }
-
-    public class GroupsContext : DbContext
-    {
-        public DbSet<Group> Groups { get; set; }
     }
 }
