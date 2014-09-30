@@ -24,7 +24,7 @@ namespace MoneyTrack
             GlobalConfiguration.Configuration.DependencyResolver = new SimpleInjectorDependencyResolver(container);
         }
 
-        public static Container BuildContainer()
+        public static Container BuildContainer(Action<Container> createCustomRegistrations = null)
         {
             var container = new Container();
 
@@ -35,11 +35,8 @@ namespace MoneyTrack
             foreach (var module in modules)
                 module.Load(container);
 
-            container.RegisterMvcControllers(Assembly.GetExecutingAssembly());
-            container.RegisterWebApiControllers(GlobalConfiguration.Configuration);
-            container.RegisterWebApiFilterProvider(GlobalConfiguration.Configuration);
-            container.RegisterMvcIntegratedFilterProvider();
-
+            if (createCustomRegistrations != null) 
+                createCustomRegistrations(container);
             container.Verify();
 
             return container;

@@ -163,6 +163,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BrowserJsonFormatter.cs" />
     <Compile Include="Controllers\Api\GroupsController.cs" />
+    <Compile Include="Controllers\Controllers.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Group.cs" />
     <Compile Include="IModule.cs" />
