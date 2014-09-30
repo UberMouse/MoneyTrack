@@ -13,10 +13,11 @@ namespace MoneyTrack.Models
         public DateTime Date { get; set; }
         public string Description { get; set; }
         public string Amount { get; set; }
-        
-        public Group Group { get; set; }
+
         [ForeignKey("Group")]
         public int GroupId { get; set; }
+        [Required]
+        public virtual Group Group { get; set; }
 
         public static Transaction From(BNZTransaction bnzTransaction)
         {
