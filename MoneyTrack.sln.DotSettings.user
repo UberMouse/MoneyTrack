@@ -1,0 +1,7 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
+  &lt;Assembly Path="C:\Users\Taylor\Dropbox\Programming\C#\MoneyTrack\bin\System.Web.Http.dll" /&gt;&#xD;
+&lt;/AssemblyExplorer&gt;</s:String>
+	<s:Boolean x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestSessionPersistentData/=DD48BF52FA794F9C8DB2EDA81B767B56/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestSessionPersistentData/=DD48BF52FA794F9C8DB2EDA81B767B56/Name/@EntryValue">Groups</s:String>
+	<s:String x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestSessionPersistentData/=DD48BF52FA794F9C8DB2EDA81B767B56/XmlSerializedElements/@EntryValue">&lt;Session&gt;&lt;Elements&gt;&lt;UnitTestElement Provider="nUnit" Id="MoneyTrack.tests.Groups" type="NUnitTestFixtureElement" Project="51C8BA9C-4A4B-410E-8B5C-D999EEEE133B" /&gt;&lt;UnitTestElement Provider="nUnit" Id="MoneyTrack.tests.Groups.It_Works" ParentId="MoneyTrack.tests.Groups" type="NUnitTestElement" TypeName="MoneyTrack.tests.Groups" MethodName="It_Works" Project="51C8BA9C-4A4B-410E-8B5C-D999EEEE133B" /&gt;&lt;/Elements&gt;&lt;/Session&gt;</s:String></wpf:ResourceDictionary>
