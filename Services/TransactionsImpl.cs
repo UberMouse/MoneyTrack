@@ -49,5 +49,13 @@ namespace MoneyTrack.Services
             }
             return false;
         }
+
+        public void UpdateGroupIds(int oldId, int newId)
+        {
+            foreach (var t in _context.Transactions.Where(t => t.GroupId == oldId))
+                t.GroupId = newId;
+
+            _context.SaveChanges();
+        }
     }
 }

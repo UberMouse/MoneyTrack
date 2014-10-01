@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.Core.Objects;
@@ -17,6 +18,7 @@ namespace MoneyTrack.Models
         public string Amount { get; set; }
 
         [ForeignKey("Group")]
+        [DefaultValue(1)]
         public int GroupId { get; set; }
         public virtual Group Group { get; set; }
 
@@ -42,7 +44,7 @@ namespace MoneyTrack.Models
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (ObjectContext.GetObjectType(obj.GetType()) != this.GetType()) return false;
+            if (ObjectContext.GetObjectType(obj.GetType()) != GetType()) return false;
             
             return Equals((Transaction) obj);
         }

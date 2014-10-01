@@ -10,5 +10,6 @@ namespace MoneyTrack.Services
         void Update(Transaction t);
         Transaction Find(int id);
         bool Contains(Transaction t);
+        void UpdateGroupIds(int oldId, int newId);
     }
 }

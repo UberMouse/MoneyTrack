@@ -10,11 +10,11 @@ namespace MoneyTrack.Controllers.Api
     public class TransactionsController : ApiController
     {
         private readonly ITransactions _transactions;
-        private readonly BNZ.IClient _client;
+        private readonly IClient _client;
         private readonly ITransactionsImporter _importer;
 
 
-        public TransactionsController(ITransactions transactions, BNZ.IClient client, ITransactionsImporter importer)
+        public TransactionsController(ITransactions transactions, IClient client, ITransactionsImporter importer)
         {
             _transactions = transactions;
             _client = client;

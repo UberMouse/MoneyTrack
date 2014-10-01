@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MoneyTrack.Controllers.Api;
 using MoneyTrack.Models;
 using MoneyTrack.Services;
 using NUnit.Framework;
@@ -17,7 +18,7 @@ namespace MoneyTrack.tests
     public class TransactionsControllerTests
     {
         private Container _container;
-        private Controllers.Api.TransactionsController _controller;
+        private TransactionsController _controller;
 
         public void SetUp()
         {
@@ -30,7 +31,7 @@ namespace MoneyTrack.tests
                 c.Options.AllowOverridingRegistrations = false;
             });
 
-            _controller = _container.GetInstance<Controllers.Api.TransactionsController>();
+            _controller = _container.GetInstance<TransactionsController>();
         }
 
         [Test]
@@ -38,7 +39,7 @@ namespace MoneyTrack.tests
         {
             SetUp();
 
-            var credentials = new Controllers.Api.TransactionsController.Credentials
+            var credentials = new TransactionsController.Credentials
             {
                 AccessId = Environment.GetEnvironmentVariable("BNZ_AID"),
                 Password = Environment.GetEnvironmentVariable("BNZ_PW")
@@ -119,6 +120,12 @@ namespace MoneyTrack.tests
         public bool Contains(Transaction t)
         {
             return _transactions.Contains(t);
+        }
+
+        public void UpdateGroupIds(int oldId, int newId)
+        {
+            foreach (var t in _transactions.Where(t => t.GroupId == oldId))
+                t.GroupId = newId;
         }
     }
 }

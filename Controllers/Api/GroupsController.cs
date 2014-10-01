@@ -11,23 +11,37 @@ namespace MoneyTrack.Controllers.Api
     public class GroupsController : ApiController
     {
         private readonly IGroups _groups;
+        private readonly ITransactions _transactions;
 
-        public GroupsController(IGroups groups)
+        public GroupsController(IGroups groups, ITransactions transactions)
         {
             _groups = groups;
+            _transactions = transactions;
         }
 
         [HttpPost]
         public Group Index(GroupData data)
         {
             if(!data.Valid()) throw new Exception("Color is invalid");
-           return _groups.Create(data.Name, data.Color);
+            var group = new Group
+            {
+                Color = data.Color,
+                Name = data.Name
+            };
+            return _groups.Add(group);
         }
 
         [HttpGet]
         public Group Index(int id)
         {
             return _groups.Find(id);
+        }
+
+        [HttpPost]
+        public void Delete(DeleteData data)
+        {
+            _transactions.UpdateGroupIds(data.Id, 1);
+            _groups.Delete(data.Id);
         }
 
         [HttpGet]
@@ -47,6 +61,11 @@ namespace MoneyTrack.Controllers.Api
                 if (!ColorValidator.IsMatch(Color)) return false;
                 return Color.Length == 3 || Color.Length == 6;
             }
+        }
+
+        public class DeleteData
+        {
+            public int Id { get; set; }
         }
     }
 }

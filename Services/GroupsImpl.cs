@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
+using System.Diagnostics;
 using System.Linq;
 using MoneyTrack.Models;
 
@@ -15,14 +16,11 @@ namespace MoneyTrack.Services
             _context = context;
         }
 
-        public Group Create(string name, string color)
+        public Group Add(Group group)
         {
-            var group = new Group() {Name = name, Color = color};
-
-            _context.Groups.Add(group);
-            _context.SaveChangesAsync();
-
-            return group;
+            var newGroup = _context.Groups.Add(group);
+            _context.SaveChanges();
+            return newGroup;
         }
 
         public Group Find(int id)
@@ -39,6 +37,15 @@ namespace MoneyTrack.Services
         public List<Group> All()
         {
             return _context.Groups.ToList();
+        }
+
+        public void Delete(int id)
+        {
+            var group = Find(id);
+
+            _context.Groups.Remove(group);
+
+            _context.SaveChanges();
         }
     }
 }

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Web.Http.Dependencies;
 using System.Web.Mvc;
 using SimpleInjector;
+using IDependencyResolver = System.Web.Mvc.IDependencyResolver;
 
 namespace MoneyTrack
 {
-    public class SimpleInjectorDependencyResolver : System.Web.Mvc.IDependencyResolver, System.Web.Http.Dependencies.IDependencyResolver, System.Web.Http.Dependencies.IDependencyScope
+    public class SimpleInjectorDependencyResolver : IDependencyResolver, System.Web.Http.Dependencies.IDependencyResolver, IDependencyScope
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SimpleInjectorDependencyResolver"/> class.
@@ -21,7 +22,7 @@ namespace MoneyTrack
                 throw new ArgumentNullException("container");
             }
 
-            this.Container = container;
+            Container = container;
         }
 
         /// <summary>Gets the container.</summary>
@@ -40,10 +41,10 @@ namespace MoneyTrack
             // controller has a parameterless public constructor" exception.
             if (!serviceType.IsAbstract && typeof(IController).IsAssignableFrom(serviceType))
             {
-                return this.Container.GetInstance(serviceType);
+                return Container.GetInstance(serviceType);
             }
 
-            return ((IServiceProvider)this.Container).GetService(serviceType);
+            return ((IServiceProvider)Container).GetService(serviceType);
         }
 
         /// <summary>Resolves multiply registered services.</summary>
@@ -51,7 +52,7 @@ namespace MoneyTrack
         /// <returns>The requested services.</returns>
         public IEnumerable<object> GetServices(Type serviceType)
         {
-            return this.Container.GetAllInstances(serviceType);
+            return Container.GetAllInstances(serviceType);
         }
 
         IDependencyScope System.Web.Http.Dependencies.IDependencyResolver.BeginScope()
@@ -61,13 +62,13 @@ namespace MoneyTrack
 
         object IDependencyScope.GetService(Type serviceType)
         {
-            return ((IServiceProvider)this.Container)
+            return ((IServiceProvider)Container)
                 .GetService(serviceType);
         }
 
         IEnumerable<object> IDependencyScope.GetServices(Type serviceType)
         {
-            return this.Container.GetAllInstances(serviceType);
+            return Container.GetAllInstances(serviceType);
         }
 
         void IDisposable.Dispose()
