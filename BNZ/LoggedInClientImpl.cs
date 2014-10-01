@@ -11,7 +11,7 @@ namespace MoneyTrack.BNZ
         private readonly ITransactions _transactions;
         private readonly RestClient _client;
 
-        internal LoggedInClientImpl(ITransactions transactions, RestClient client)
+        public LoggedInClientImpl(ITransactions transactions, RestClient client)
         {
             _transactions = transactions;
             _client = client;

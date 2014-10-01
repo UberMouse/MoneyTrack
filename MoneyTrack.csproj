@@ -161,6 +161,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="BNZ\BNZModule.cs" />
     <Compile Include="BrowserJsonFormatter.cs" />
     <Compile Include="Controllers\Api\GroupsController.cs" />
     <Compile Include="Controllers\Controllers.cs" />
@@ -181,7 +182,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="BNZ\ClientImpl.cs" />
-    <Compile Include="BNZ\ILoggedInClientImpl.cs" />
+    <Compile Include="BNZ\LoggedInClientImpl.cs" />
     <Compile Include="BNZ\Models\BNZTransaction.cs" />
     <Compile Include="DbContext.cs" />
     <Compile Include="Models\Transaction.cs" />

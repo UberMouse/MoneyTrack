@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Net;
 using MoneyTrack.Services;
 using RestSharp;
@@ -28,6 +29,7 @@ namespace MoneyTrack.BNZ
                                                       .AddParameter("password", pw);
 
             var response = client.Execute(request);
+            if (response.StatusCode != HttpStatusCode.OK) throw new Exception("Error logging in");
 
             //2. Send request to activate token
             var tokenRequest = new RestRequest(
@@ -35,8 +37,7 @@ namespace MoneyTrack.BNZ
             );
             client.Execute(tokenRequest);
 
-            if (response.StatusCode != HttpStatusCode.OK) return null;
-            else return new LoggedInClientImpl(_transactions, client);
+            return new LoggedInClientImpl(_transactions, client);
         }
     }
 }
