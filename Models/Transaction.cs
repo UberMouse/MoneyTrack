@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.Core.Objects;
 using MoneyTrack.BNZ.Models;
 
 namespace MoneyTrack.Models
@@ -34,15 +35,21 @@ namespace MoneyTrack.Models
 
         protected bool Equals(Transaction other)
         {
-            return string.Equals(AccountId, other.AccountId) && string.Equals(Amount, other.Amount) && string.Equals(Description, other.Description);
+            return string.Equals(AccountId, other.AccountId) && string.Equals(Amount, other.Amount) && string.Equals(Description, other.Description) && Date.Equals(other.Date);
         }
 
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
+            if (ObjectContext.GetObjectType(obj.GetType()) != this.GetType()) return false;
+            
             return Equals((Transaction) obj);
+        }
+
+        public override string ToString()
+        {
+            return string.Format("AccountId: {0}, Date: {1}, Description: {2}, Amount: {3}, GroupId: {4}, Id: {5}", AccountId, Date, Description, Amount, GroupId, Id);
         }
 
         public override int GetHashCode()

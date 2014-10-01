@@ -16,7 +16,9 @@ namespace MoneyTrack.Services
 
         public void Import(IEnumerable<BNZTransaction> transactions)
         {
-            foreach(var t in transactions.Select(Transaction.From).Where(t => !_transactions.Contains(t)))
+            var cTransactions = transactions.Select(Transaction.From).ToList();
+            var toInsert = cTransactions.Where(t => !_transactions.Contains(t)).ToList();
+            foreach(var t in toInsert)
                 _transactions.Add(t);
         }
     }

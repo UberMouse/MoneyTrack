@@ -1,14 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MoneyTrack.Models;
 using MoneyTrack.Services;
+using NUnit.Framework;
 using SimpleInjector;
+using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
+using CollectionAssert = NUnit.Framework.CollectionAssert;
 
 namespace MoneyTrack.tests
 {
-    [TestClass]
+    [TestFixture]
     public class TransactionsControllerTests
     {
         private Container _container;
@@ -25,12 +30,10 @@ namespace MoneyTrack.tests
                 c.Options.AllowOverridingRegistrations = false;
             });
 
-
-
             _controller = _container.GetInstance<Controllers.Api.TransactionsController>();
         }
 
-        [TestMethod]
+        [Test]
         public void Import_Adds_Retrieved_BNZ_Transactions()
         {
             SetUp();
@@ -44,6 +47,47 @@ namespace MoneyTrack.tests
             _controller.Import(credentials);
 
             Assert.IsTrue(_container.GetInstance<ITransactions>().All().Count != 0);
+        }
+
+        [Test]
+        public void Returns_List_Of_Transactions_Ordered_By_Time()
+        {
+            SetUp();
+
+            var transactions = new[]
+            {
+                new Transaction
+                {
+                    Date = DateTime.Now.Subtract(TimeSpan.FromDays(2))
+                },
+                new Transaction
+                {
+                    Date = DateTime.Now.Subtract(TimeSpan.FromDays(3))
+                },
+                new Transaction
+                {
+                    Date = DateTime.Now
+                },
+                new Transaction
+                {
+                    Date = DateTime.Now.AddDays(1)
+                },
+                new Transaction
+                {
+                    Date = DateTime.Now.Subtract(TimeSpan.FromDays(6))
+                }
+            };
+
+            var service = _container.GetInstance<ITransactions>();
+
+            foreach (var t in transactions)
+                service.Add(t);
+
+            var recievedTransactions = _controller.Index();
+            var expectedTransactions = recievedTransactions.OrderBy(t => t.Date).Reverse().ToList();
+
+            foreach (var pair in recievedTransactions.Zip(expectedTransactions, Tuple.Create))
+                Assert.AreEqual(pair.Item1, pair.Item2);
         }
     }
 

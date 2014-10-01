@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using MoneyTrack.Models;
@@ -39,7 +40,14 @@ namespace MoneyTrack.Services
 
         public bool Contains(Transaction t)
         {
-            return _context.Transactions.Contains(t);
+            //Force everything into Local collection so object comparison can be performed
+            _context.Transactions.Load();
+            foreach (var ct in _context.Transactions.Local)
+            {
+                if (t.Equals(ct))
+                    return true;
+            }
+            return false;
         }
     }
 }

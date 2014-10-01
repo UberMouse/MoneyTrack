@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 using MoneyTrack.BNZ;
 using MoneyTrack.Models;
@@ -23,7 +24,7 @@ namespace MoneyTrack.Controllers.Api
         [HttpGet]
         public List<Transaction> Index()
         {
-            return _transactions.All();
+            return _transactions.All().OrderBy(t => t.Date).Reverse().ToList();
         }
 
         [HttpPost]
